@@ -11,6 +11,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.example.demo.entity.AppRole;
 import com.example.demo.entity.Role;
@@ -90,6 +92,20 @@ public class SecurityConfig {
             }
         };
     }
+	
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+	    return new WebMvcConfigurer() {
+	        @Override
+	        public void addCorsMappings(CorsRegistry registry) {
+	            registry.addMapping("/**")  // Allow CORS on all endpoints
+	                .allowedOrigins("http://localhost:3000")  // React frontend origin
+	                .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+	                .allowedHeaders("*")
+	                .allowCredentials(true);  // Allow cookies if needed
+	        }
+	    };
+	}
 	
 	
 }

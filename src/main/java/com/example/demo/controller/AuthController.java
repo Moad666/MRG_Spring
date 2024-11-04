@@ -155,14 +155,5 @@ public class AuthController {
 	public String currentUserName(@AuthenticationPrincipal UserDetails userDetails) {
 	    return (userDetails != null) ? userDetails.getUsername() : "";
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }
