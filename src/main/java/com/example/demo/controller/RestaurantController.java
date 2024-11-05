@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.entity.City;
 import com.example.demo.entity.Restaurant;
 import com.example.demo.service.RestaurantService;
 
@@ -27,6 +29,12 @@ public class RestaurantController {
 	public List<Restaurant> findAll(){
 		return restaurantService.findAll();
 	}
+	
+	/*@GetMapping("/findAll")
+    public ResponseEntity<List<Restaurant>> findAll() {
+        List<Restaurant> restaurants = restaurantService.findAll();
+        return ResponseEntity.ok(restaurants);
+    }*/
 	
 	@GetMapping("/findById/{id}")
 	public Optional<Restaurant> findById(@PathVariable int id){
@@ -47,6 +55,15 @@ public class RestaurantController {
 	public void update(@RequestBody Restaurant restaurant, @PathVariable int id) {
 		restaurantService.update(restaurant, id);
 	}
+	
+	@GetMapping("/findByCity/{cityName}")
+    public ResponseEntity<List<Restaurant>> findByCityName(@PathVariable String cityName) {
+        List<Restaurant> restaurants = restaurantService.findRestaurantsByCityName(cityName);
+        if (restaurants.isEmpty()) {
+            return ResponseEntity.noContent().build(); // or ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(restaurants);
+    }
 	
 	
 	

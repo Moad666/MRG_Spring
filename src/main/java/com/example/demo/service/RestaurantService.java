@@ -65,6 +65,10 @@ public class RestaurantService {
 		}
 	}
 	
+	public List<Restaurant> findRestaurantsByCityName(String cityName) {
+        return restaurantRepository.findByCityName(cityName);
+    }
+	
 	
 	
 
