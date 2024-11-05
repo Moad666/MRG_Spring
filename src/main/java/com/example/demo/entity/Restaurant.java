@@ -38,6 +38,16 @@ public class Restaurant {
 	@Column(name="image")
 	private String image;
 	
+	@Column(name="phone")
+	private int phone;
+	
+	@Column(name="ouvert")
+	private int ouvert;
+	
+	@Column(name="fermer")
+	private int fermer;
+	
+	
 	@ManyToOne(fetch = FetchType.EAGER, cascade= {CascadeType.MERGE})
 	@JoinColumn(name = "city_id", referencedColumnName = "city_id")
     @JsonBackReference
@@ -46,7 +56,8 @@ public class Restaurant {
 	
 	public Restaurant() {}
 
-	public Restaurant(int id, String name, String description, String location, float averageRating, String image,City city) {
+	public Restaurant(int id, String name, String description, String location, 
+			float averageRating, String image,int phone, int ouvert, int fermer ,  City city) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -54,6 +65,9 @@ public class Restaurant {
 		this.location = location;
 		this.averageRating = averageRating;
 		this.image = image;
+		this.phone = phone;
+		this.ouvert = ouvert;
+		this.fermer = fermer;
 		this.city = city;
 	}
 
@@ -112,10 +126,30 @@ public class Restaurant {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	
-	
-	
-	
 
+	public int getPhone() {
+		return phone;
+	}
+
+	public void setPhone(int phone) {
+		this.phone = phone;
+	}
+
+	public int getOuvert() {
+		return ouvert;
+	}
+
+	public void setOuvert(int ouvert) {
+		this.ouvert = ouvert;
+	}
+
+	public int getFermer() {
+		return fermer;
+	}
+
+	public void setFermer(int fermer) {
+		this.fermer = fermer;
+	}
+	
+	
 }
