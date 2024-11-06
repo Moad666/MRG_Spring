@@ -60,7 +60,7 @@ public class RestaurantController {
     public ResponseEntity<List<Restaurant>> findByCityName(@PathVariable String cityName) {
         List<Restaurant> restaurants = restaurantService.findRestaurantsByCityName(cityName);
         if (restaurants.isEmpty()) {
-            return ResponseEntity.noContent().build(); // or ResponseEntity.notFound().build();
+            return ResponseEntity.noContent().build();
         }
         return ResponseEntity.ok(restaurants);
     }
